@@ -1,0 +1,176 @@
+:root {
+  --large-font-family: "Inter-SemiBold", Helvetica;
+  --large-font-size: 18px;
+  --large-font-style: normal;
+  --large-font-weight: 600;
+  --large-letter-spacing: 0px;
+  --large-line-height: 28px;
+  --slate-900: rgba(15, 23, 42, 1);
+  --subtle-font-family: "Inter-Regular", Helvetica;
+  --subtle-font-size: 14px;
+  --subtle-font-style: normal;
+  --subtle-font-weight: 400;
+  --subtle-letter-spacing: 0px;
+  --subtle-line-height: 20px;
+}
+
+.box {
+  height: 46px;
+  width: 82px;
+}
+
+.box .layer {
+  height: 46px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 82px;
+}
+
+.head1 {
+  color: #8990ad;
+  font-family: "Montserrat-Bold", Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  top: 0;
+}
+
+.slide {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.slide .div {
+  background-color: #ffffff;
+  height: 1388px;
+  position: relative;
+  width: 1920px;
+}
+
+.slide .content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  left: 140px;
+  position: absolute;
+  top: 147px;
+  width: 445px;
+}
+
+.slide .title {
+  color: var(--slate-900);
+  font-family: var(--large-font-family);
+  font-size: var(--large-font-size);
+  font-style: var(--large-font-style);
+  font-weight: var(--large-font-weight);
+  letter-spacing: var(--large-letter-spacing);
+  line-height: var(--large-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.slide .text-wrapper {
+  color: #64748b;
+  font-family: var(--subtle-font-family);
+  font-size: var(--subtle-font-size);
+  font-style: var(--subtle-font-style);
+  font-weight: var(--subtle-font-weight);
+  letter-spacing: var(--subtle-letter-spacing);
+  line-height: var(--subtle-line-height);
+  position: relative;
+  width: 393px;
+}
+
+.slide .overlap {
+  height: 40px;
+  left: 329px;
+  position: absolute;
+  top: 283px;
+  width: 174px;
+}
+
+.slide .group-2 {
+  height: 40px;
+  position: relative;
+  width: 176px;
+}
+
+.slide .group-3 {
+  background-image: url(./rectangle-16.svg);
+  background-size: 100% 100%;
+  box-shadow: 0px 12px 20px #0000000a;
+  height: 88px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1920px;
+}
+
+.slide .group-4 {
+  height: 46px;
+  left: 31px;
+  position: absolute;
+  top: 21px;
+  width: 356px;
+}
+
+.slide .head1 {
+  color: #8990ad;
+  font-family: "Montserrat-Bold", Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  left: 89px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 7px;
+}
+
+.slide .layer {
+  height: 46px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 82px;
+}
+
+.solid-button {
+  all: unset;
+  box-sizing: border-box;
+  height: 40px;
+  left: 1675px;
+  position: absolute;
+  top: 24px;
+  width: 90px;
+  color: white;
+}
+
+.slide .overlap-group {
+  background-image: url(./rectangle-2.svg);
+  background-size: 100% 100%;
+  height: 40px;
+  position: relative;
+  width: 88px;
+}
+
+.slide .log {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  left: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}

@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  width: 1044px;
+  padding: 8px 12px;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+}
+
+.label {
+  width: 162px;
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 100% */
+}
