@@ -7,44 +7,12 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import "./index.css";
-import "./stepper.css";
+import Form from "./form.jsx";
 
 const steps = [
   {
     label: "Basic Information",
-    description: (
-      <form>
-        <div>
-          <label className="label">Company Name :</label>
-          <input className="form" placeholder="ABC Company" />
-        </div>
-        <div>
-          <label className="label">Contact Info :</label>
-          <input className="form" placeholder="xx-xxxxxxxxx" />
-        </div>
-        <div>
-          <label className="label">NAICS Code(s) :</label>
-          <input className="form" placeholder="xxxxxx" />
-        </div>
-        <div>
-          <label className="label">Annual Revenue :</label>
-          <input className="form" placeholder="12344 $" />
-        </div>
-        <div>
-          <label className="label">Number of Employees :</label>
-          <input className="form" placeholder="123" />
-        </div>
-        <div>
-          <label className="label">Geographical Coverage Area :</label>
-          <input className="form" placeholder="1234 msq" />
-        </div>
-        <div>
-          <label className="label">Diversity Council Affiliation : </label>
-          <input className="form" placeholder="NMSDC, WBENC" />
-        </div>
-      </form>
-    ),
+    description: <Form />,
   },
   {
     label: "Detail Information",
