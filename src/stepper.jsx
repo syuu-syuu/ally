@@ -1,4 +1,5 @@
-import * as React from "react";
+import * as React from "react"; 
+import { useForm } from 'react-hook-form';
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -10,55 +11,67 @@ import Typography from "@mui/material/Typography";
 import "./index.css";
 import "./stepper.css";
 
-const steps = [
-  {
-    label: "Basic Information",
-    description: (
-      <form>
-        <div>
-          <label className="label">Company Name :</label>
-          <input className="form" placeholder="ABC Company" />
-        </div>
-        <div>
-          <label className="label">Contact Info :</label>
-          <input className="form" placeholder="xx-xxxxxxxxx" />
-        </div>
-        <div>
-          <label className="label">NAICS Code(s) :</label>
-          <input className="form" placeholder="xxxxxx" />
-        </div>
-        <div>
-          <label className="label">Annual Revenue :</label>
-          <input className="form" placeholder="12344 $" />
-        </div>
-        <div>
-          <label className="label">Number of Employees :</label>
-          <input className="form" placeholder="123" />
-        </div>
-        <div>
-          <label className="label">Geographical Coverage Area :</label>
-          <input className="form" placeholder="1234 msq" />
-        </div>
-        <div>
-          <label className="label">Diversity Council Affiliation : </label>
-          <input className="form" placeholder="NMSDC, WBENC" />
-        </div>
-      </form>
-    ),
-  },
-  {
-    label: "Detail Information",
-  },
-  {
-    label: "Collaboration",
-  },
-  {
-    label: "Final Output",
-  },
-];
+
 
 function OurStepper() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const { register, handleSubmit } = useForm(); 
+  const [activeStep, setActiveStep] = React.useState(0); 
+  const [formData, setFormData] = React.useState({});
+  const steps = [
+    {
+      label: "Basic Information",
+      description: (
+        <form 
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <div>
+            <label className="label">Company Name :</label>
+            <input {...register("CompanyName", {required: true})}className="form" placeholder="ABC Company" />
+          </div>
+          <div>
+            <label className="label">Contact Info :</label>
+            <input {...register("ContactInfo", {required: true})}className="form" placeholder="xx-xxxxxxxxx" />
+          </div>
+          <div>
+            <label className="label">NAICS Code(s) :</label>
+            <input {...register("NAICSCode", {required: true})}className="form" placeholder="xxxxxx" />
+          </div>
+          <div>
+            <label className="label">Annual Revenue :</label>
+            <input {...register("AnnualRevenue", {required: true})}className="form" placeholder="12344 $" />
+          </div>
+          <div>
+            <label className="label">Number of Employees :</label>
+            <input {...register("NumberOfEmployees", {required: true})}className="form" placeholder="123" />
+          </div>
+          <div>
+            <label className="label">Geographical Coverage Area :</label>
+            <input {...register("GeographicalCoverageArea")}className="form" placeholder="1234 msq" />
+          </div>
+          <div>
+            <label className="label">Diversity Council Affiliation : </label>
+            <input {...register("DiversityCouncilAffiliation")}className="form" placeholder="NMSDC, WBENC" />
+          </div>  
+        </form>
+      ),
+    },
+    {
+      label: "Detail Information",
+    },
+    {
+      label: "Collaboration",
+    },
+    {
+      label: "Final Output",
+    },
+  ];
+  const handleSaveAndNext = () => {
+    
+    handleSubmit((data) => {
+      console.log(data); 
+      handleNext(); 
+    })();
+  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -92,8 +105,9 @@ function OurStepper() {
                   </Button>
                   <Button
                     className="button"
-                    variant="contained"
-                    onClick={handleNext}
+                    variant="contained" 
+                    type="button"
+                    onClick={handleSaveAndNext}
                     sx={{
                       mt: 1,
                       mr: 1,
