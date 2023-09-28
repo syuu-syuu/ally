@@ -2,28 +2,6 @@ import React from "react";
 import "./form.css";
 
 function Form({ onFormChange }) {
-  // const [formData, setFormData] = React.useState({
-  //   company: "",
-  //   contact: "",
-  //   NAICS: "",
-  //   revenue: "",
-  //   employees: "",
-  //   area: "",
-  //   diversity: "",
-  // });
-
-  // const handleFill = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
-  // React.useEffect(() => {
-  //   console.log(formData);
-  // }, [formData]);
-
   return (
     <form>
       <div>
