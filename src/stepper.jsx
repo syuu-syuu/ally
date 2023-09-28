@@ -7,12 +7,12 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import "./form.css";
 import Form from "./form.jsx";
 
 const steps = [
   {
     label: "Basic Information",
-    description: <Form />,
   },
   {
     label: "Detail Information",
@@ -26,9 +26,42 @@ const steps = [
 ];
 
 function OurStepper() {
+  const [formData, setFormData] = React.useState({
+    "Company Name": "",
+    "Contact Info": "",
+    "NAICS Code(s)": "",
+    "Annual Revenue": "",
+    "Number of Employees": "",
+    "Geographical Coverage Area": "",
+    "Diversity Council Affiliation": "",
+  });
+
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const getStepContent = (stepIndex) => {
+    switch (stepIndex) {
+      case 0:
+        return <Form onFormChange={handleFormChange} />;
+      case 1:
+        return "";
+      case 2:
+        return "";
+      case 3:
+        return "";
+      default:
+        return "";
+    }
+  };
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleNext = () => {
+    console.log(formData);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -48,7 +81,7 @@ function OurStepper() {
             <StepLabel className="custom-step-label">{step.label}</StepLabel>
             <></>
             <StepContent>
-              <Typography>{step.description}</Typography>
+              {getStepContent(index)}
               <Box sx={{ mb: 2 }}>
                 <div>
                   <Button
