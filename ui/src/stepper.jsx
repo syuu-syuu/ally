@@ -52,6 +52,7 @@ function OurStepper() {
         return "";
     }
   };
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({
