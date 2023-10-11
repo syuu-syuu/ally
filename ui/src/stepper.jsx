@@ -61,8 +61,26 @@ function OurStepper() {
     });
   };
 
-  const handleNext = () => {
-    console.log(formData);
+  // const handleNext = () => {
+  //   console.log(formData);
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // };
+
+  const handleNext = async () => {
+    try {
+      console.log(formData);
+      const response = await fetch("http://localhost:3000/submit", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error("There was an error submitting the data", error);
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

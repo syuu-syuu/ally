@@ -1,7 +1,8 @@
+const bodyParser = require('body-parser');
 const express = require('express')
 const app = express()
 const port = 3000
-
+app.use(bodyParser.json());
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
@@ -18,12 +19,16 @@ app.get('/', (req, res) => {
 })
 
 
-// Respond to POST request on the root route (/)
-// Used when users input data in the form page
-// '/user/form'
-app.post('/', (req, res) => {
-    res.send('You have successfuly submitted the form!')
-})
+
+app.post('/submit', (req, res) => {
+    console.log('Data received from frontend:', req.body);
+
+    // Stretch goal: Send the data back in the response
+    res.json({
+        message: 'You have successfully submitted the form!',
+        formData: req.body
+    });
+});
 
 // Respond to a PUT request to the /user route
 // Used when users want to modify the data they have input
