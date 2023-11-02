@@ -49,9 +49,22 @@ const db = new AWS.DynamoDB();
 //     return result.Item ? result.Item.value : 0;
 // };
 
-app.get('/get', (req, res) => {
-    res.send('Hello World!')
-})
+app.get('/database', async (req, res) => {
+    const scanParams = {
+        TableName: "Supplier",
+    };
+
+    try {
+        const retrievedData = await dynamoDB.scan(scanParams).promise();
+        res.json({
+            message: 'Successfully retrieved data from the database!',
+            savedData: retrievedData.Items
+        });
+    } catch (err) {
+        console.error("Error fetching data:", JSON.stringify(err, null, 2));
+        res.status(500).json({ message: 'Failed to retrieve data from the database.' });
+    }
+});
 
 
 
@@ -76,12 +89,13 @@ app.post('/submit', async (req, res) => {
     req.body.CompanyName = req.body['Company Name'];
     delete req.body['Company Name'];
 
-    const params = {
+    const putParams = {
         TableName: "Supplier",
         Item: {
             ...req.body
         }
     }
+
 
     const getParams = {
         TableName: "Supplier",
@@ -92,7 +106,7 @@ app.post('/submit', async (req, res) => {
     };
 
     try {
-        await dynamoDB.put(params).promise();
+        await dynamoDB.put(putParams).promise();
         const retrievedData = await dynamoDB.get(getParams).promise();
         res.json({
             message: 'You have successfully submitted the form and the data is successfully saved in the database!',

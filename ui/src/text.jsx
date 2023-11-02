@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./header.css";
 
-function App() {
+function Test() {
   const [triggerGet, setTriggerGet] = useState(false);
   const [triggerPost, setTriggerPost] = useState(false);
   const [triggerPut, setTriggerPut] = useState(false);
@@ -61,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export default Test;
