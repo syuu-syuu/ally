@@ -49,7 +49,7 @@ const db = new AWS.DynamoDB();
 //     return result.Item ? result.Item.value : 0;
 // };
 
-app.get('/', (req, res) => {
+app.get('/get', (req, res) => {
     res.send('Hello World!')
 })
 
@@ -83,9 +83,21 @@ app.post('/submit', async (req, res) => {
         }
     }
 
+    const getParams = {
+        TableName: "Supplier",
+        Key: {
+            // Currently, "CompanyName" is the primary key. May use unique ID later.
+            "CompanyName": req.body.CompanyName
+        }
+    };
+
     try {
         await dynamoDB.put(params).promise();
-        res.json({ message: 'You have successfully submitted the form and the data is successfully saved in the database!' });
+        const retrievedData = await dynamoDB.get(getParams).promise();
+        res.json({
+            message: 'You have successfully submitted the form and the data is successfully saved in the database!',
+            savedData: retrievedData.Item
+        });
     } catch (err) {
         console.error("Error saving data:", JSON.stringify(err, null, 2));
         res.status(500).json({ message: 'Failed to save data in the database.' });

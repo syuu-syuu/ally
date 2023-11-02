@@ -1,0 +1,27 @@
+.table-container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+}
+
+th,
+td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Remove the bottom border from the last table row */
+tr:last-child td {
+  border-bottom: none;
+}

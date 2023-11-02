@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -9,6 +10,8 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "./form.css";
 import Form from "./form.jsx";
+import ErrorPage from "./error.jsx";
+import SuccessPage from "./success.jsx";
 
 const steps = [
   {
@@ -26,6 +29,10 @@ const steps = [
 ];
 
 function OurStepper() {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [responseData, setResponseData] = useState(null);
+
   const [formData, setFormData] = React.useState({
     "Company Name": "",
     "Contact Info": "",
@@ -76,14 +83,29 @@ function OurStepper() {
           "Content-Type": "application/json",
         },
       });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
       const responseData = await response.json();
+      setResponseData(responseData);
+      setSuccess(true);
       console.log(responseData);
     } catch (error) {
+      setError(error.message);
       console.error("There was an error submitting the data", error);
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
+  // Redirect to an Error Page if any error is caught
+  if (error) {
+    return <ErrorPage message={error} />;
+  }
+  // Redirect to a Success Page if the operation is successful
+  if (success) {
+    return <SuccessPage data={responseData} />;
+  }
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
