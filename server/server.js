@@ -6,13 +6,48 @@ app.use(bodyParser.json());
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-
 const cors = require('cors');
 app.use(cors());
-
-
 // app.use('/user', express.static(path.join(__dirname, 'user')));
 
+const AWS = require('aws-sdk');
+
+AWS.config.update({
+    region: "us-west-2",
+    endpoint: "http://localhost:8000",
+    accessKeyId: 'fakeAccessKey',
+    secretAccessKey: 'fakeSecretKey'
+});
+
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const db = new AWS.DynamoDB();
+
+// const params = {
+//     TableName: 'Supplier',
+//     Item: {
+//         "CompanyID": "LAST_ID",
+//         "lastAssigned": 1
+//     }
+// };
+
+// dynamoDB.put(params, (err, data) => {
+//     if (err) {
+//         console.error("Error initializing LAST_ID:", JSON.stringify(err, null, 2));
+//     } else {
+//         console.log("LAST_ID initialized successfully:", JSON.stringify(data, null, 2));
+//     }
+// });
+
+// const getLastID = async () => {
+//     const params = {
+//         TableName: "Supplier",
+//         Key: {
+//             "CompanyID": "LAST_ID" 
+//         }
+//     };
+//     const result = await dynamoDB.get(params).promise();
+//     return result.Item ? result.Item.value : 0;
+// };
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -20,15 +55,44 @@ app.get('/', (req, res) => {
 
 
 
-app.post('/submit', (req, res) => {
-    console.log('Data received from frontend:', req.body);
+app.post('/submit', async (req, res) => {
 
-    // Stretch goal: Send the data back in the response
-    res.json({
-        message: 'You have successfully submitted the form!',
-        formData: req.body
+    console.log('Data received from frontend:', req.body);
+    db.listTables({}, (err, data) => {
+        if (err) {
+            console.error("Error listing tables:", err);
+        } else {
+            console.log("Tables:", data.TableNames);
+        }
     });
-});
+    // Stretch goal: Send the data back in the response
+    // res.json({
+    //     message: 'You have successfully submitted the form!',
+    //     formData: req.body
+    // });
+
+    // let lastID = await getLastID();
+
+    req.body.CompanyName = req.body['Company Name'];
+    delete req.body['Company Name'];
+
+    const params = {
+        TableName: "Supplier",
+        Item: {
+            ...req.body
+        }
+    }
+
+    try {
+        await dynamoDB.put(params).promise();
+        res.json({ message: 'You have successfully submitted the form and the data is successfully saved in the database!' });
+    } catch (err) {
+        console.error("Error saving data:", JSON.stringify(err, null, 2));
+        res.status(500).json({ message: 'Failed to save data in the database.' });
+    }
+
+
+})
 
 // Respond to a PUT request to the /user route
 // Used when users want to modify the data they have input
@@ -43,3 +107,6 @@ app.put('/', (req, res) => {
 app.delete('/', (req, res) => {
     res.send('Data deleted!')
 })
+
+
+
