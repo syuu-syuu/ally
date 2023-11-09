@@ -10,12 +10,16 @@
     "nodemon": "^3.0.1"
   },
   "scripts": {
-  "start": "nodemon server.js"
-},
-"nodemonConfig": {
-    "watch": ["server/"],
+    "start": "nodemon server.js"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server/"
+    ],
     "ext": "js,json",
-    "ignore": ["node_modules/"],
+    "ignore": [
+      "node_modules/"
+    ],
     "exec": "node"
   }
 }

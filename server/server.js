@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
 const express = require('express')
 const app = express()
@@ -49,9 +50,70 @@ const db = new AWS.DynamoDB();
 //     return result.Item ? result.Item.value : 0;
 // };
 
+// async function getProjectionExpression(columnNames) {
+//     const filteredColumnNames = columnNames.filter(name => name !== 'CompanyID');
+//     const projectionExpression = filteredColumnNames.join(', ');
+
+
+//     return projectionExpression;
+// }
+
+async function createTableIfNotExists(tableName) {
+    const tableParams = {
+        TableName: tableName,
+        AttributeDefinitions: [
+            {
+                AttributeName: 'CompanyName',
+                AttributeType: 'S'
+            }
+        ],
+        KeySchema: [
+            {
+                AttributeName: 'CompanyName',
+                KeyType: 'HASH'
+            }
+        ],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+        }
+    };
+
+
+    db.listTables((err, data) => {
+        if (err) {
+            console.error("Unable to list tables. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            if (!data.TableNames.includes(tableName)) {
+
+                db.createTable(tableParams, (err, data) => {
+                    if (err) {
+                        console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+                    } else {
+                        console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+                    }
+                });
+            } else {
+                console.log(`Table ${tableName} already exists.`);
+            }
+        }
+    });
+}
+
+
+createTableIfNotExists('Supplier');
+
+
 app.get('/database', async (req, res) => {
+
+
+    const tableName = "Supplier";
+    // const projectionExpression = "CompanyName, NAICS Code(s), Contact Info, Number of Employees, Geographical Coverage Area, Diversity Council Affiliation, Timestamp, Annual Revenue";
+
+
     const scanParams = {
-        TableName: "Supplier",
+        TableName: tableName,
+        // ProjectionExpression: projectionExpression
     };
 
     try {
@@ -67,17 +129,20 @@ app.get('/database', async (req, res) => {
 });
 
 
-
+// let columnNames = [];
 app.post('/submit', async (req, res) => {
-
+    const newId = uuidv4();
+    const timestamp = new Date().toISOString();
+    console.log(newId);
+    console.log(timestamp);
     console.log('Data received from frontend:', req.body);
-    db.listTables({}, (err, data) => {
-        if (err) {
-            console.error("Error listing tables:", err);
-        } else {
-            console.log("Tables:", data.TableNames);
-        }
-    });
+    // db.listTables({}, (err, data) => {
+    //     if (err) {
+    //         console.error("Error listing tables:", err);
+    //     } else {
+    //         console.log("Tables:", data.TableNames);
+    //     }
+    // });
     // Stretch goal: Send the data back in the response
     // res.json({
     //     message: 'You have successfully submitted the form!',
@@ -89,12 +154,19 @@ app.post('/submit', async (req, res) => {
     req.body.CompanyName = req.body['Company Name'];
     delete req.body['Company Name'];
 
+    const itemToPut = {
+        CompanyID: newId,
+        Timestamp: timestamp,
+        ...req.body
+    };
+
+    // Delete unwanted key name
+    delete itemToPut['Company Name'];
+
     const putParams = {
         TableName: "Supplier",
-        Item: {
-            ...req.body
-        }
-    }
+        Item: itemToPut
+    };
 
 
     const getParams = {
@@ -106,6 +178,10 @@ app.post('/submit', async (req, res) => {
     };
 
     try {
+
+        // const itemKeys = Object.keys(itemToPut);
+        // columnNames = Array.from(new Set([...columnNames, ...itemKeys]));
+
         await dynamoDB.put(putParams).promise();
         const retrievedData = await dynamoDB.get(getParams).promise();
         res.json({

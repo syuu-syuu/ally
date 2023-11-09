@@ -115,6 +115,13 @@ function OurStepper() {
   };
 
   return (
+    /* <div className="content">
+        <div className="title">Ally Supplier Overview Questionnaire</div>
+        <p className="text-wrapper">
+          Please fill the following with the best of your knowledge.
+        </p>
+      </div> */
+
     <Box sx={{ maxWidth: 400 }}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
