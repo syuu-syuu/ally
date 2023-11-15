@@ -12,27 +12,17 @@ function MainApp() {
   return (
     <div className="slide">
       <Routes>
-        <Route
-          path="/form"
-          element={
-            <div>
-              <Header />
-              <div className="slide">
-                <div className="overlap">
-                  <OurStepper />
-                </div>
-                <div>
-                  <Test />
-                </div>
-              </div>
-            </div>
-          }
-        />
+        <Route path="/form" element={<OurStepper />} />
         <Route path="/database" element={<DataBase />} />
       </Routes>
     </div>
   );
 }
+
+// {
+//     path: '/prompts/:id',
+//     element: <div><PromptPage></PromptPage></div>,
+//   },
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

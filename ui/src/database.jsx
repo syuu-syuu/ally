@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Layout from "./layout";
-import "./database.css";
+import Header from "./header";
 
 function DataBase() {
   const [savedData, setSavedData] = useState([]);
@@ -110,49 +109,60 @@ function DataBase() {
     return " ⇅";
   };
   return (
-    <div className="table-container">
-      <input
-        type="text"
-        placeholder="search..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="search-input"
-      />
-      <table>
-        <thead>
-          <tr>
-            <th> {}</th>
-            {columnHeaders.map((header) => (
-              <th key={header} onClick={() => requestSort(header)}>
-                {header} {getSortDirectionSymbol(header)}
-              </th>
-            ))}
-          </tr>
-        </thead>
+    <Header>
+      <div className="content">
+        <div className="title">Ally Supplier Database</div>
+        <div className="text-wrapper">Ally Supplier Details</div>
+        {/* <p className="text-wrapper">
+          Please fill the following with the best of your knowledge.
+        </p> */}
+      </div>
 
-        <tbody>
-          {filteredData.map((row, index) => (
-            <tr key={index}>
-              <td>
-                <input type="checkbox" />
-              </td>
-              {columnHeaders.map((header, cellIndex) => (
-                <td
-                  key={cellIndex}
-                  className={
-                    typeof row[header] === "number" ? "number-cell" : ""
-                  }
-                >
-                  {header === "Timestamp"
-                    ? formatDate(row[header])
-                    : row[header]}
-                </td>
+      <div className="table-container">
+        <input
+          type="text"
+          placeholder="search..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="search-input"
+        />
+
+        <table>
+          <thead>
+            <tr>
+              <th> {}</th>
+              {columnHeaders.map((header) => (
+                <th key={header} onClick={() => requestSort(header)}>
+                  {header} {getSortDirectionSymbol(header)}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+
+          <tbody>
+            {filteredData.map((row, index) => (
+              <tr key={index}>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                {columnHeaders.map((header, cellIndex) => (
+                  <td
+                    key={cellIndex}
+                    className={
+                      typeof row[header] === "number" ? "number-cell" : ""
+                    }
+                  >
+                    {header === "Timestamp"
+                      ? formatDate(row[header])
+                      : row[header]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Header>
   );
 }
 

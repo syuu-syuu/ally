@@ -1,16 +1,10 @@
 import React from "react";
 import "./header.css";
 
-function Header() {
+function Header({ children }) {
   return (
     <div className="div">
-      <div className="content">
-        <div className="title">Ally Supplier Overview Questionnaire</div>
-        <p className="text-wrapper">
-          Please fill the following with the best of your knowledge.
-        </p>
-      </div>
-
+      <div className="slide">{children}</div>
       <div className="group-3">
         <button className="solid-button">
           <div className="overlap-group">

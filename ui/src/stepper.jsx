@@ -12,6 +12,7 @@ import "./form.css";
 import Form from "./form.jsx";
 import ErrorPage from "./error.jsx";
 import SuccessPage from "./success.jsx";
+import Header from "./header.jsx";
 
 const steps = [
   {
@@ -115,58 +116,67 @@ function OurStepper() {
   };
 
   return (
-    /* <div className="content">
-        <div className="title">Ally Supplier Overview Questionnaire</div>
+    <Header>
+      <div className="content">
+        <div className="title">Ally Supplier Overview Questionaire</div>
         <p className="text-wrapper">
           Please fill the following with the best of your knowledge.
         </p>
-      </div> */
-
-    <Box sx={{ maxWidth: 400 }}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
-            <StepLabel className="custom-step-label">{step.label}</StepLabel>
-            <></>
-            <StepContent>
-              {getStepContent(index)}
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="button"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{
-                      mt: 1,
-                      mr: 1,
-                      backgroundColor: "#650360",
-                      fontfamily: "inter, sans-serif",
-                    }}
-                  >
-                    {index === steps.length - 1 ? "Finish" : "Save and Next"}
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </Box>
+      </div>
+      <div className="overlap">
+        <Box sx={{ maxWidth: 400 }}>
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((step, index) => (
+              <Step key={step.label}>
+                <StepLabel className="custom-step-label">
+                  {step.label}
+                </StepLabel>
+                <></>
+                <StepContent>
+                  {getStepContent(index)}
+                  <Box sx={{ mb: 2 }}>
+                    <div>
+                      <Button
+                        disabled={index === 0}
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        className="button"
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{
+                          mt: 1,
+                          mr: 1,
+                          backgroundColor: "#650360",
+                          fontfamily: "inter, sans-serif",
+                        }}
+                      >
+                        {index === steps.length - 1
+                          ? "Finish"
+                          : "Save and Next"}
+                      </Button>
+                    </div>
+                  </Box>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+          {activeStep === steps.length && (
+            <Paper square elevation={0} sx={{ p: 3 }}>
+              <Typography>
+                All steps completed - you&apos;re finished
+              </Typography>
+              <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                Reset
+              </Button>
+            </Paper>
+          )}
+        </Box>
+      </div>
+    </Header>
   );
 }
 
