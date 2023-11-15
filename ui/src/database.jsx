@@ -7,6 +7,7 @@ function DataBase() {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Fetch data from the database everytime the page is rendered.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,6 +32,7 @@ function DataBase() {
     fetchData();
   }, []);
 
+  // Print the data retrived from the database whenever the data is updated.
   useEffect(() => {
     console.log(savedData);
   }, [savedData]);
@@ -97,6 +99,17 @@ function DataBase() {
     "Diversity Council Affiliation",
     "Timestamp",
   ];
+
+  // const displayColumnOrder = [
+  //   "Supplier Name",
+  //   "Existing Supplier",
+  //   "Opportunity Category",
+  //   "Spend Potential",
+  //   "Existing Spend",
+  //   "Contact Name",
+  //   "Email",
+  //   "Phone Number",
+  // ];
 
   const columnHeaders = savedData.length
     ? displayColumnOrder.filter((header) => header in savedData[0])

@@ -1,74 +1,158 @@
-import React from "react";
+import React, { useState } from "react";
+import GenericField from "./genericField";
 import "./form.css";
 
-function Form({ onFormChange }) {
+const steps = [
+  // First Step
+  {
+    fields: [
+      {
+        type: "input",
+        name: "Company Name",
+        label: "Company Name",
+        placeholder: "ABC Company",
+      },
+      {
+        type: "input",
+        name: "Contact Info",
+        label: "Contact Info",
+        placeholder: "xx-xxxxxxxxx",
+      },
+      {
+        type: "input",
+        name: "NAICS Code(s)",
+        label: "NAICS Code(s)",
+        placeholder: "xxxxxx",
+      },
+      {
+        type: "input",
+        name: "Annual Revenue",
+        label: "Annual Revenue",
+        placeholder: "12344 $",
+      },
+      {
+        type: "input",
+        name: "Number of Employees",
+        label: "Number of Employees",
+        placeholder: "123",
+      },
+      {
+        type: "input",
+        name: "Geographical Coverage Area",
+        label: "Geographical Coverage Area",
+        placeholder: "1234 msq",
+      },
+      {
+        type: "input",
+        name: "Diversity Council Affiliation",
+        label: "Diversity Council Affiliation",
+        placeholder: "NMSDC, WBENC",
+      },
+    ],
+  },
+  // Second Step
+  {
+    fields: [
+      {
+        type: "input",
+        name: "Overview",
+        label: "Please provide an overview of your company",
+        placeholder: "Company overview",
+      },
+      {
+        type: "input",
+        name: "Business specialty",
+        label: "What is your business's specialty, or niche?",
+        placeholder: "Niche",
+      },
+      {
+        type: "input",
+        name: "Potential engagement",
+        label: "Please elaborate on potential future engagement",
+        placeholder: "Potential engagement",
+      },
+    ],
+  },
+  // Third Step
+  {
+    fields: [
+      {
+        type: "checkbox",
+        name: "relationship",
+        label: "Does your business have any existing relationship with Ally?",
+        options: [
+          { value: "Yes", label: "Yes" },
+          { value: "No", label: "No" },
+        ],
+      },
+      {
+        type: "checkbox",
+        name: "Supplier Diversity program",
+        label: "Does your company have a Supplier Diversity program?",
+        options: [
+          { value: "Yes", label: "Yes" },
+          { value: "No", label: "No" },
+        ],
+      },
+      {
+        type: "checkbox",
+        name: "businessType",
+        label: "Is your business",
+        options: [
+          { value: "minority-owned", label: "minority-owned" },
+          { value: "women-owned", label: "women-owned" },
+          { value: "veteran-owned", label: "veteran-owned" },
+          { value: "LGBTQ-owned", label: "LGBTQ-owned" },
+          { value: "Disability-owned", label: "Disability-owned" },
+          { value: "small business", label: "small business" },
+        ],
+      },
+      {
+        type: "checkbox",
+        name: "contingent labor services",
+        label:
+          "Does your company offer contingent labor services? (if yes, please complete additional survey opened in browser)",
+        options: [
+          { value: "Yes", label: "Yes" },
+          { value: "No", label: "No" },
+        ],
+      },
+    ],
+  },
+];
+
+function GenericForm({ stepIndex, onFormChange }) {
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
+
+  const handleCheckboxChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedCheckboxes((prev) => {
+      const updated = new Set(prev[name] || []);
+      if (updated.has(value)) {
+        updated.delete(value);
+      } else {
+        updated.add(value);
+      }
+      return { ...prev, [name]: Array.from(updated) };
+    });
+  };
+
+  const fields = steps[stepIndex].fields;
+
   return (
     <form>
-      <div>
-        <label className="label">Company Name :</label>
-        <input
-          className="form"
-          placeholder="ABC Company"
-          name="Company Name"
-          onChange={onFormChange}
+      {fields.map((field, index) => (
+        <GenericField
+          key={index}
+          field={field}
+          onChange={
+            field.type === "checkbox" ? handleCheckboxChange : onFormChange
+          }
+          selectedCheckboxes={selectedCheckboxes}
         />
-      </div>
-      <div>
-        <label className="label">Contact Info : </label>
-        <input
-          className="form"
-          placeholder="xx-xxxxxxxxx"
-          name="Contact Info"
-          onChange={onFormChange}
-        />
-      </div>
-      <div>
-        <label className="label">NAICS Code(s) :</label>
-        <input
-          className="form"
-          placeholder="xxxxxx"
-          name="NAICS Code(s)"
-          onChange={onFormChange}
-        />
-      </div>
-      <div>
-        <label className="label">Annual Revenue :</label>
-        <input
-          className="form"
-          placeholder="12344 $"
-          name="Annual Revenue"
-          onChange={onFormChange}
-        />
-      </div>
-      <div>
-        <label className="label">Number of Employees :</label>
-        <input
-          className="form"
-          placeholder="123"
-          name="Number of Employees"
-          onChange={onFormChange}
-        />
-      </div>
-      <div>
-        <label className="label">Geographical Coverage Area :</label>
-        <input
-          className="form"
-          placeholder="1234 msq"
-          name="Geographical Coverage Area"
-          onChange={onFormChange}
-        />
-      </div>
-      <div>
-        <label className="label">Diversity Council Affiliation : </label>
-        <input
-          className="form"
-          placeholder="NMSDC, WBENC"
-          name="Diversity Council Affiliation"
-          onChange={onFormChange}
-        />
-      </div>
+      ))}
     </form>
   );
 }
 
-export default Form;
+export default GenericForm;
