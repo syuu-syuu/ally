@@ -25,9 +25,10 @@ const steps = [
 function Questionaire() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  // const [success, setSuccess] = useState(false);
-  const [responseData, setResponseData] = useState(null);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [success, setSuccess] = useState(true);
+  // const [responseData, setResponseData] = useState(null);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -38,13 +39,17 @@ function Questionaire() {
     if (activeStep < steps.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
-      handleFinish();
+      handleSubmit();
     }
   };
 
-  const handleFinish = async () => {
+  const handleSubmit = async () => {
     try {
-      console.log("Submitting form data:", formData);
+      const finalFormData = {
+        ...formData,
+        ...selectedCheckboxes,
+      };
+      console.log("Submitting form data:", finalFormData);
       const response = await fetch("http://localhost:3000/submit", {
         method: "POST",
         body: JSON.stringify(formData),
@@ -55,31 +60,43 @@ function Questionaire() {
         throw new Error(response.statusText);
       }
 
-      const responseData = await response.json();
-      setResponseData(responseData);
+      setIsSubmitted(true);
+      setSuccess(true);
+      setActiveStep(steps.length);
+
+      // const responseData = await response.json();
+      // setResponseData(responseData);
       console.log("Form submitted successfully!");
     } catch (error) {
       console.error("There was an error submitting the data", error);
+      setIsSubmitted(true);
+      setSuccess(false);
     }
   };
 
   const getStepContent = (stepIndex) => {
+    const finalFormData = {
+      ...formData,
+      ...selectedCheckboxes,
+    };
     if (stepIndex === steps.length - 1) {
-      return <Summary formData={formData} />;
+      return <Summary formData={finalFormData} />;
     } else {
       return (
-        <GenericForm stepIndex={stepIndex} onFormChange={handleFormChange} />
+        <GenericForm
+          stepIndex={stepIndex}
+          onFormChange={handleFormChange}
+          selectedCheckboxes={selectedCheckboxes}
+          setSelectedCheckboxes={setSelectedCheckboxes}
+        />
       );
     }
   };
 
-  return (
+  const renderStepper = () => (
     <div>
-      <Header />
       <div className="stepper-header">
-        <div className="stepper-title">
-          Ally Supplier Overview Questionnaire
-        </div>
+        <p className="stepper-title">Ally Supplier Overview Questionnaire</p>
         <p className="stepper-msg">
           Please fill the following with the best of your knowledge.
         </p>
@@ -119,7 +136,7 @@ function Questionaire() {
                         }}
                       >
                         {index === steps.length - 1
-                          ? "Finish"
+                          ? "Submit"
                           : "Save and Next"}
                       </Button>
                     </div>
@@ -140,6 +157,34 @@ function Questionaire() {
           )}
         </Box>
       </div>
+    </div>
+  );
+
+  const renderSuccessMessage = () => (
+    <div className="msg">
+      <p className="msg-title">Success</p>
+      <p className="msg-content">Your form has been submitted successfully !</p>
+    </div>
+  );
+
+  const renderErrorMessage = () => (
+    <div className="msg">
+      <p className="msg-title">Opps</p>
+      <p className="msg-content">Something goes wrong !</p>
+    </div>
+  );
+
+  let content;
+  if (isSubmitted) {
+    content = success ? renderSuccessMessage() : renderErrorMessage();
+  } else {
+    content = renderStepper();
+  }
+
+  return (
+    <div>
+      <Header />
+      {content}
     </div>
   );
 }

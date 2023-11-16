@@ -31,3 +31,33 @@
   display: flex;
   justify-content: flex-end;
 }
+.msg {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 297px;
+  margin-top: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.msg-title {
+  color: #5f285e;
+  font-family: Poppins;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.msg-content {
+  margin-top: 20px;
+
+  color: #758490;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

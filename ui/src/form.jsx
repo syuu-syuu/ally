@@ -79,6 +79,7 @@ const steps = [
       {
         type: "checkbox",
         name: "relationship",
+        checkboxType: "binary",
         label: "Does your business have any existing relationship with Ally?",
         options: [
           { value: "Yes", label: "Yes" },
@@ -88,6 +89,7 @@ const steps = [
       {
         type: "checkbox",
         name: "Supplier Diversity program",
+        checkboxType: "binary",
         label: "Does your company have a Supplier Diversity program?",
         options: [
           { value: "Yes", label: "Yes" },
@@ -97,6 +99,7 @@ const steps = [
       {
         type: "checkbox",
         name: "businessType",
+        checkboxType: "multiple",
         label: "Is your business",
         options: [
           { value: "minority-owned", label: "minority-owned" },
@@ -110,6 +113,7 @@ const steps = [
       {
         type: "checkbox",
         name: "contingent labor services",
+        checkboxType: "binary",
         label:
           "Does your company offer contingent labor services? (if yes, please complete additional survey opened in browser)",
         options: [
@@ -121,21 +125,72 @@ const steps = [
   },
 ];
 
-function GenericForm({ stepIndex, onFormChange }) {
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
-
+function GenericForm({
+  stepIndex,
+  onFormChange,
+  selectedCheckboxes,
+  setSelectedCheckboxes,
+}) {
   const handleCheckboxChange = (e) => {
-    const { name, value } = e.target;
-    setSelectedCheckboxes((prev) => {
-      const updated = new Set(prev[name] || []);
-      if (updated.has(value)) {
-        updated.delete(value);
-      } else {
-        updated.add(value);
-      }
-      return { ...prev, [name]: Array.from(updated) };
-    });
+    const { name, value, checked } = e.target;
+    const field = steps[stepIndex].fields.find((f) => f.name === name);
+    const isBinary = field.checkboxType === "binary";
+
+    if (isBinary) {
+      setSelectedCheckboxes((prev) => ({
+        ...prev,
+        [name]: checked ? value : "",
+      }));
+    } else {
+      setSelectedCheckboxes((prev) => {
+        const currentValues = new Set(prev[name] || []);
+        if (checked) {
+          currentValues.add(value);
+        } else {
+          currentValues.delete(value);
+        }
+        return { ...prev, [name]: Array.from(currentValues) };
+      });
+    }
+    // const { name, value, checked } = e.target;
+
+    // // Determine if the checkbox is binary based on the options length
+    // const isBinary =
+    //   steps[stepIndex].fields.find((f) => f.name === name).options.length === 2;
+
+    // if (isBinary) {
+    //   // Binary checkbox logic: Toggle between value and empty string
+    //   setSelectedCheckboxes((prev) => ({
+    //     ...prev,
+    //     [name]: checked ? value : "",
+    //   }));
+    // } else {
+    //   // Multiple-choice checkbox logic: Add or remove value from array
+    //   setSelectedCheckboxes((prev) => {
+    //     const currentValues = new Set(prev[name] || []);
+    //     if (checked) {
+    //       currentValues.add(value);
+    //     } else {
+    //       currentValues.delete(value);
+    //     }
+    //     return { ...prev, [name]: Array.from(currentValues) };
+    //   });
+    // }
   };
+  // const [selectedCheckboxes, setSelectedCheckboxes] = useState("");
+
+  // const handleCheckboxChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setSelectedCheckboxes((prev) => {
+  //     const updated = new Set(prev[name] || []);
+  //     if (updated.has(value)) {
+  //       updated.delete(value);
+  //     } else {
+  //       updated.add(value);
+  //     }
+  //     return { ...prev, [name]: Array.from(updated) };
+  //   });
+  // };
 
   const fields = steps[stepIndex].fields;
 

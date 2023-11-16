@@ -1,6 +1,17 @@
 import React from "react";
 
 function GenericField({ field, onChange, selectedCheckboxes }) {
+  // Function to determine if a checkbox is checked
+  const isCheckboxChecked = (optionValue) => {
+    const fieldValues = selectedCheckboxes[field.name];
+    if (Array.isArray(fieldValues)) {
+      // For multiple-choice checkboxes
+      return fieldValues.includes(optionValue);
+    }
+    // For binary (Yes/No) checkboxes
+    return fieldValues === optionValue;
+  };
+
   switch (field.type) {
     case "input":
       return (
@@ -30,16 +41,22 @@ function GenericField({ field, onChange, selectedCheckboxes }) {
         </div>
       );
     case "checkbox":
+      const isBinary = field.checkboxType === "binary";
+
       return (
         <div>
-          <label className="label">{field.label}:</label>
+          <label>{field.label}</label>
           {field.options.map((option, idx) => (
             <span key={idx}>
               <input
                 type="checkbox"
                 name={field.name}
                 value={option.value}
-                checked={selectedCheckboxes[field.name]?.includes(option.value)}
+                checked={
+                  isBinary
+                    ? selectedCheckboxes[field.name] === option.value
+                    : isCheckboxChecked(option.value)
+                }
                 onChange={onChange}
               />
               {option.label}
@@ -47,6 +64,7 @@ function GenericField({ field, onChange, selectedCheckboxes }) {
           ))}
         </div>
       );
+
     default:
       return null;
   }

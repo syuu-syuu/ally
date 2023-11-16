@@ -125,12 +125,11 @@ function DataBase() {
   return (
     <div>
       <Header />
-      <div className="content">
-        <div className="title">Ally Supplier Database</div>
-        <div className="text-wrapper">Ally Supplier Details</div>
-        {/* <p className="text-wrapper">
-          Please fill the following with the best of your knowledge.
-        </p> */}
+      <div>
+        <div className="stepper-header">
+          <p className="stepper-title">Ally Supplier Database</p>
+          <p className="stepper-msg">Ally Supplier Details.</p>
+        </div>
 
         <div className="table-container">
           <input
