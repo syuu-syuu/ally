@@ -103,14 +103,14 @@ const steps = [
         label: "Is your business",
         options: [
           {
-            value: "minority-owned",
-            label: "minority-owned",
+            value: "Minority-owned",
+            label: "Minority-owned",
           },
-          { value: "women-owned", label: "women-owned" },
-          { value: "veteran-owned", label: "veteran-owned" },
+          { value: "Women-owned", label: "Women-owned" },
+          { value: "Veteran-owned", label: "Veteran-owned" },
           { value: "LGBTQ-owned", label: "LGBTQ-owned" },
           { value: "Disability-owned", label: "Disability-owned" },
-          { value: "small business", label: "small business" },
+          { value: "Small business", label: "Small business" },
         ],
       },
       {
@@ -118,7 +118,7 @@ const steps = [
         name: "contingent labor services",
         checkboxType: "binary",
         label:
-          "Does your company offer contingent labor services? (if yes, please complete additional survey opened in browser)",
+          "Does your company offer contingent labor services? (If yes, please complete additional survey opened in browser)",
         options: [
           { value: "Yes", label: "Yes" },
           { value: "No", label: "No" },
