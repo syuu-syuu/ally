@@ -54,19 +54,19 @@ const steps = [
   {
     fields: [
       {
-        type: "input",
+        type: "textarea",
         name: "Overview",
         label: "Please provide an overview of your company",
         placeholder: "Company overview",
       },
       {
-        type: "input",
+        type: "textarea",
         name: "Business specialty",
         label: "What is your business's specialty, or niche?",
         placeholder: "Niche",
       },
       {
-        type: "input",
+        type: "textarea",
         name: "Potential engagement",
         label: "Please elaborate on potential future engagement",
         placeholder: "Potential engagement",

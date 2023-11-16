@@ -15,6 +15,20 @@ function GenericField({ field, onChange, selectedCheckboxes }) {
           />
         </div>
       );
+
+    case "textarea":
+      return (
+        <div>
+          <label className="label">{field.label}:</label>
+          <textarea
+            className="form"
+            name={field.name}
+            placeholder={field.placeholder}
+            onChange={onChange}
+            rows={4}
+          />
+        </div>
+      );
     case "checkbox":
       return (
         <div>
