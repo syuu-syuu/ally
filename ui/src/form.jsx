@@ -102,7 +102,10 @@ const steps = [
         checkboxType: "multiple",
         label: "Is your business",
         options: [
-          { value: "minority-owned", label: "minority-owned" },
+          {
+            value: "minority-owned",
+            label: "minority-owned",
+          },
           { value: "women-owned", label: "women-owned" },
           { value: "veteran-owned", label: "veteran-owned" },
           { value: "LGBTQ-owned", label: "LGBTQ-owned" },
@@ -152,45 +155,7 @@ function GenericForm({
         return { ...prev, [name]: Array.from(currentValues) };
       });
     }
-    // const { name, value, checked } = e.target;
-
-    // // Determine if the checkbox is binary based on the options length
-    // const isBinary =
-    //   steps[stepIndex].fields.find((f) => f.name === name).options.length === 2;
-
-    // if (isBinary) {
-    //   // Binary checkbox logic: Toggle between value and empty string
-    //   setSelectedCheckboxes((prev) => ({
-    //     ...prev,
-    //     [name]: checked ? value : "",
-    //   }));
-    // } else {
-    //   // Multiple-choice checkbox logic: Add or remove value from array
-    //   setSelectedCheckboxes((prev) => {
-    //     const currentValues = new Set(prev[name] || []);
-    //     if (checked) {
-    //       currentValues.add(value);
-    //     } else {
-    //       currentValues.delete(value);
-    //     }
-    //     return { ...prev, [name]: Array.from(currentValues) };
-    //   });
-    // }
   };
-  // const [selectedCheckboxes, setSelectedCheckboxes] = useState("");
-
-  // const handleCheckboxChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setSelectedCheckboxes((prev) => {
-  //     const updated = new Set(prev[name] || []);
-  //     if (updated.has(value)) {
-  //       updated.delete(value);
-  //     } else {
-  //       updated.add(value);
-  //     }
-  //     return { ...prev, [name]: Array.from(updated) };
-  //   });
-  // };
 
   const fields = steps[stepIndex].fields;
 

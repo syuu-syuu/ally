@@ -24,3 +24,27 @@
   padding-left: 40px;
   margin-top: 20px;
 }
+
+.option-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 763px;
+}
+
+.checkbox {
+  margin-top: 10px;
+  margin-right: 40px;
+  width: 140px;
+}
+
+.table-row {
+  margin-bottom: 10px;
+}
+.option-msg {
+  display: inline-block;
+  width: 120px;
+  margin-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

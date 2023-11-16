@@ -1,4 +1,5 @@
 import React from "react";
+import "./form.css";
 
 function GenericField({ field, onChange, selectedCheckboxes }) {
   // Function to determine if a checkbox is checked
@@ -44,24 +45,26 @@ function GenericField({ field, onChange, selectedCheckboxes }) {
       const isBinary = field.checkboxType === "binary";
 
       return (
-        <div>
+        <div className="table-row">
           <label>{field.label}</label>
-          {field.options.map((option, idx) => (
-            <span key={idx}>
-              <input
-                type="checkbox"
-                name={field.name}
-                value={option.value}
-                checked={
-                  isBinary
-                    ? selectedCheckboxes[field.name] === option.value
-                    : isCheckboxChecked(option.value)
-                }
-                onChange={onChange}
-              />
-              {option.label}
-            </span>
-          ))}
+          <div className="option-box">
+            {field.options.map((option, idx) => (
+              <div className="checkbox" key={idx}>
+                <input
+                  type="checkbox"
+                  name={field.name}
+                  value={option.value}
+                  checked={
+                    isBinary
+                      ? selectedCheckboxes[field.name] === option.value
+                      : isCheckboxChecked(option.value)
+                  }
+                  onChange={onChange}
+                />
+                <span className="option-msg">{option.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       );
 
