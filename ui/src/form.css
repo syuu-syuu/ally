@@ -6,14 +6,20 @@
   border-radius: 6px;
   border: 1px solid #cbd5e1;
   background: #fff;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .label {
-  width: 162px;
   color: #000;
   font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 14px; /* 100% */
+  line-height: 14px;
+}
+
+.form-container {
+  padding-left: 40px;
+  width: 886px;
+  margin-top: 20px;
 }

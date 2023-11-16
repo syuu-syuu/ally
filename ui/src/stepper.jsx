@@ -1,16 +1,19 @@
 import * as React from "react";
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
-import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+  Box,
+  Paper,
+  Button,
+  Typography,
+} from "@mui/material";
 import GenericForm from "./form.jsx";
 import Summary from "./summary";
-import "./form.css";
+import Header from "./header.jsx";
+import "./stepper.css";
 
 const steps = [
   { label: "Basic Information" },
@@ -72,58 +75,71 @@ function Questionaire() {
 
   return (
     <div>
-      {/* <div className="content">
-        <div className="title">Ally Supplier Overview Questionnaire</div>
-        <p className="text-wrapper">
+      <Header></Header>
+
+      <div className="stepper-header">
+        <div className="stepper-title">
+          Ally Supplier Overview Questionnaire
+        </div>
+        <p className="stepper-msg">
           Please fill the following with the best of your knowledge.
         </p>
-      </div> */}
-      <Box sx={{ maxWidth: 400 }}>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((step, index) => (
-            <Step key={step.label}>
-              <StepLabel className="custom-step-label">{step.label}</StepLabel>
-              <StepContent>
-                {getStepContent(index)}
-                <Box sx={{ mb: 2 }}>
-                  <div>
-                    <Button
-                      disabled={index === 0}
-                      onClick={() =>
-                        setActiveStep((prevActiveStep) => prevActiveStep - 1)
-                      }
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      className="button"
-                      variant="contained"
-                      onClick={handleNext}
-                      sx={{
-                        mt: 1,
-                        mr: 1,
-                        backgroundColor: "#650360",
-                        fontFamily: "inter, sans-serif",
-                      }}
-                    >
-                      {index === steps.length - 1 ? "Finish" : "Save and Next"}
-                    </Button>
-                  </div>
-                </Box>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-        {activeStep === steps.length && (
-          <Paper square elevation={0} sx={{ p: 3 }}>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={() => setActiveStep(0)} sx={{ mt: 1, mr: 1 }}>
-              Reset
-            </Button>
-          </Paper>
-        )}
-      </Box>
+      </div>
+
+      <div className="stepper-container">
+        <Box sx={{ maxWidth: 400 }}>
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((step, index) => (
+              <Step key={step.label}>
+                <StepLabel className="custom-step-label">
+                  {step.label}
+                </StepLabel>
+                <StepContent>
+                  {getStepContent(index)}
+                  <Box sx={{ mb: 2 }}>
+                    <div>
+                      <Button
+                        disabled={index === 0}
+                        onClick={() =>
+                          setActiveStep((prevActiveStep) => prevActiveStep - 1)
+                        }
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        className="button"
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{
+                          mt: 1,
+                          mr: 1,
+                          backgroundColor: "#650360",
+                          fontFamily: "inter, sans-serif",
+                        }}
+                      >
+                        {index === steps.length - 1
+                          ? "Finish"
+                          : "Save and Next"}
+                      </Button>
+                    </div>
+                  </Box>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+          {activeStep === steps.length && (
+            <Paper square elevation={0} sx={{ p: 3 }}>
+              <Typography>
+                All steps completed - you&apos;re finished
+              </Typography>
+              <Button onClick={() => setActiveStep(0)} sx={{ mt: 1, mr: 1 }}>
+                Reset
+              </Button>
+            </Paper>
+          )}
+        </Box>
+      </div>
     </div>
   );
 }

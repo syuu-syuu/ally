@@ -1,0 +1,27 @@
+.stepper-header {
+  margin-top: 59px;
+  margin-left: 140px;
+}
+
+.stepper-title {
+  color: var(--slate-900, #0f172a);
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+
+  margin-bottom: 4px;
+}
+
+.stepper-msg {
+  color: #64748b;
+  font-family: Inter;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.stepper-container {
+  margin-top: 80px;
+  margin-left: 329px;
+  margin-right: 329px;
+}

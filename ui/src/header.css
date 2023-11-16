@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --large-font-family: "Inter-SemiBold", Helvetica;
   --large-font-size: 18px;
   --large-font-style: normal;
@@ -173,7 +173,7 @@
   top: 11px;
 }
 
-/* Temporary */
+
 .bottom-buttons {
   position: fixed;
   bottom: 0;
@@ -183,4 +183,44 @@
   justify-content: center;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.9);
+} */
+
+.header {
+  width: 100%;
+  height: 88px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 31px;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-end;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.btn {
+  width: 88px;
+  height: 40px;
+  background-color: #5f285e;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  margin-right: 40px;
+}
+
+.subtitle {
+  margin-left: 2px;
+  color: #8990ad;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 700;
 }

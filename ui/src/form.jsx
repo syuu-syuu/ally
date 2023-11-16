@@ -140,7 +140,7 @@ function GenericForm({ stepIndex, onFormChange }) {
   const fields = steps[stepIndex].fields;
 
   return (
-    <form>
+    <form className="form-container">
       {fields.map((field, index) => (
         <GenericField
           key={index}
