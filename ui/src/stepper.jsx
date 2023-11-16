@@ -75,8 +75,7 @@ function Questionaire() {
 
   return (
     <div>
-      <Header></Header>
-
+      <Header />
       <div className="stepper-header">
         <div className="stepper-title">
           Ally Supplier Overview Questionnaire
@@ -97,8 +96,9 @@ function Questionaire() {
                 <StepContent>
                   {getStepContent(index)}
                   <Box sx={{ mb: 2 }}>
-                    <div>
+                    <div className="btns">
                       <Button
+                        className="btn-pre"
                         disabled={index === 0}
                         onClick={() =>
                           setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -108,7 +108,7 @@ function Questionaire() {
                         Back
                       </Button>
                       <Button
-                        className="button"
+                        className="btn-next"
                         variant="contained"
                         onClick={handleNext}
                         sx={{

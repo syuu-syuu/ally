@@ -25,3 +25,9 @@
   margin-left: 329px;
   margin-right: 329px;
 }
+
+.btns {
+  width: 1130px;
+  display: flex;
+  justify-content: flex-end;
+}

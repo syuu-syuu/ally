@@ -1,16 +1,17 @@
 .form {
   display: flex;
-  width: 1044px;
+  width: 1047px;
   padding: 8px 12px;
   align-items: center;
   border-radius: 6px;
   border: 1px solid #cbd5e1;
   background: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-top: 10px;
 }
 
 .label {
+  width: 1047px;
   color: #000;
   font-family: Inter;
   font-size: 14px;
@@ -19,7 +20,7 @@
 }
 
 .form-container {
+  width: 1047px;
   padding-left: 40px;
-  width: 886px;
   margin-top: 20px;
 }

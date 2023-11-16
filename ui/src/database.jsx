@@ -123,7 +123,8 @@ function DataBase() {
     return " ⇅";
   };
   return (
-    <Header>
+    <div>
+      <Header />
       <div className="content">
         <div className="title">Ally Supplier Database</div>
         <div className="text-wrapper">Ally Supplier Details</div>
@@ -176,7 +177,7 @@ function DataBase() {
           </table>
         </div>
       </div>
-    </Header>
+    </div>
   );
 }
 
