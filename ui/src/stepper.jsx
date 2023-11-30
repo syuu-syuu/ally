@@ -30,8 +30,11 @@ function Questionaire() {
   const [success, setSuccess] = useState(true);
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
 
-  const handleDisclaimerChange = (isChecked) => {
-    setDisclaimerChecked(isChecked);
+  // const handleDisclaimerChange = (isChecked) => {
+  //   setDisclaimerChecked(isChecked);
+  // };
+  const handleDisclaimerChange = (event) => {
+    setDisclaimerChecked(event.target.checked);
   };
 
   const handleFormChange = (e) => {
@@ -92,6 +95,7 @@ function Questionaire() {
       return (
         <Summary
           formData={finalFormData}
+          isDisclaimerChecked={disclaimerChecked}
           onDisclaimerChange={handleDisclaimerChange}
         />
       );

@@ -59,7 +59,7 @@ function getClassNameForKey(key) {
   }
 }
 
-function Summary({ formData, isDisclaimerChecked, handleDisclaimerChange }) {
+function Summary({ formData, isDisclaimerChecked, onDisclaimerChange }) {
   return (
     <div className="summary">
       {Object.entries(formData).map(([key, value], index) => (
@@ -79,7 +79,7 @@ function Summary({ formData, isDisclaimerChecked, handleDisclaimerChange }) {
           type="checkbox"
           name="disclaimer"
           checked={isDisclaimerChecked}
-          onChange={handleDisclaimerChange}
+          onChange={onDisclaimerChange}
         />
         <span className="option-msg">
           This document neither constitutes an agreement to conduct transactions
