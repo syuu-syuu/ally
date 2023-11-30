@@ -3,7 +3,7 @@ import "./header.css";
 
 function Header() {
   return (
-    <div className="header">
+    <div className="header-block">
       <div className="header-left">
         <svg
           className="layer"

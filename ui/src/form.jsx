@@ -55,20 +55,20 @@ const steps = [
     fields: [
       {
         type: "textarea",
-        name: "Overview",
-        label: "Please provide an overview of your company",
+        name: "Please provide an overview of your company.",
+        label: "Please provide an overview of your company.",
         placeholder: "Type here",
       },
       {
         type: "textarea",
-        name: "Business specialty",
+        name: "What is your business's specialty, or niche?",
         label: "What is your business's specialty, or niche?",
         placeholder: "Type here",
       },
       {
         type: "textarea",
-        name: "Potential engagement",
-        label: "Please elaborate on potential future engagement",
+        name: "Please elaborate on potential future engagement.",
+        label: "Please elaborate on potential future engagement.",
         placeholder: "Type here",
       },
     ],
@@ -78,7 +78,7 @@ const steps = [
     fields: [
       {
         type: "checkbox",
-        name: "relationship",
+        name: "Does your business have any existing relationship with Ally?",
         checkboxType: "binary",
         label: "Does your business have any existing relationship with Ally?",
         options: [
@@ -88,7 +88,7 @@ const steps = [
       },
       {
         type: "checkbox",
-        name: "Supplier Diversity program",
+        name: "Does your company have a Supplier Diversity program?",
         checkboxType: "binary",
         label: "Does your company have a Supplier Diversity program?",
         options: [
@@ -98,7 +98,7 @@ const steps = [
       },
       {
         type: "checkbox",
-        name: "businessType",
+        name: "Your business is",
         checkboxType: "multiple",
         label: "Is your business",
         options: [
@@ -115,7 +115,7 @@ const steps = [
       },
       {
         type: "checkbox",
-        name: "contingent labor services",
+        name: "Does your company offer contingent labor services?",
         checkboxType: "binary",
         label:
           "Does your company offer contingent labor services? (If yes, please complete additional survey opened in browser)",

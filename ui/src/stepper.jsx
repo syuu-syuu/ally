@@ -28,7 +28,11 @@ function Questionaire() {
   const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [success, setSuccess] = useState(true);
-  // const [responseData, setResponseData] = useState(null);
+  const [disclaimerChecked, setDisclaimerChecked] = useState(false);
+
+  const handleDisclaimerChange = (isChecked) => {
+    setDisclaimerChecked(isChecked);
+  };
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +49,11 @@ function Questionaire() {
 
   const handleSubmit = async () => {
     try {
+      if (!disclaimerChecked) {
+        alert("Please accept the disclaimer to proceed.");
+        return;
+      }
+
       const finalFormData = {
         ...formData,
         ...selectedCheckboxes,
@@ -80,7 +89,12 @@ function Questionaire() {
       ...selectedCheckboxes,
     };
     if (stepIndex === steps.length - 1) {
-      return <Summary formData={finalFormData} />;
+      return (
+        <Summary
+          formData={finalFormData}
+          onDisclaimerChange={handleDisclaimerChange}
+        />
+      );
     } else {
       return (
         <GenericForm
@@ -92,6 +106,63 @@ function Questionaire() {
       );
     }
   };
+
+  function CustomStepIcon(props) {
+    const { active, completed, icon } = props;
+
+    if (completed) {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+        >
+          <circle cx="20" cy="20" r="20" fill="#5F285E" />
+          <path
+            d="M3.835 7.259L0.974 4.398L0 5.365L3.835 9.2L12.068 0.967L11.101 0L3.835 7.259Z"
+            fill="white"
+            transform="translate(14, 15.5)"
+          />
+        </svg>
+      );
+    }
+    if (active) {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+        >
+          <circle cx="20" cy="20" r="20" fill="#5F285E" />
+
+          <path
+            d="M10.1102 6.48531L10.7722 7.14731L4.25723 13.6563H3.59523V12.9943L10.1092 6.48031M12.6982 2.15631C12.5107 2.15821 12.3313 2.23319 12.1982 2.36531L10.8792 3.68031L13.5792 6.38031L14.8912 5.05631C14.9579 4.9898 15.0108 4.91078 15.047 4.82378C15.0831 4.73678 15.1017 4.64351 15.1017 4.54931C15.1017 4.45512 15.0831 4.36185 15.047 4.27485C15.0108 4.18785 14.9579 4.10883 14.8912 4.04231L13.2092 2.36531C13.1425 2.29794 13.0628 2.2447 12.975 2.20879C12.8872 2.17288 12.7931 2.15504 12.6982 2.15631ZM10.1102 4.45031L2.15723 12.4023V15.1023H4.85723L12.8062 7.14631L10.1062 4.44631L10.1102 4.45031Z"
+            fill="white"
+            transform="translate(11, 11)"
+          />
+        </svg>
+      );
+    }
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        fill="none"
+      >
+        <text className="icon-number" x="50%" y="50%">
+          {icon}
+        </text>
+        <path
+          d="M39.5 20C39.5 30.7696 30.7696 39.5 20 39.5C9.23045 39.5 0.5 30.7696 0.5 20C0.5 9.23045 9.23045 0.5 20 0.5C30.7696 0.5 39.5 9.23045 39.5 20Z"
+          stroke="#758490"
+        />
+      </svg>
+    );
+  }
 
   const renderStepper = () => (
     <div>
@@ -107,7 +178,10 @@ function Questionaire() {
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
               <Step key={step.label}>
-                <StepLabel className="custom-step-label">
+                <StepLabel
+                  StepIconComponent={CustomStepIcon}
+                  className="custom-step-label"
+                >
                   {step.label}
                 </StepLabel>
                 <StepContent>
@@ -145,7 +219,7 @@ function Questionaire() {
               </Step>
             ))}
           </Stepper>
-          {activeStep === steps.length && (
+          {/* {activeStep === steps.length && (
             <Paper square elevation={0} sx={{ p: 3 }}>
               <Typography>
                 All steps completed - you&apos;re finished
@@ -154,7 +228,7 @@ function Questionaire() {
                 Reset
               </Button>
             </Paper>
-          )}
+          )} */}
         </Box>
       </div>
     </div>

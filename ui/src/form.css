@@ -25,26 +25,131 @@
   margin-top: 20px;
 }
 
-.option-box {
+.table-row {
+  margin-bottom: 40px;
+}
+
+.table-row label {
+  color: #000;
+
+  /* small */
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 100% */
+}
+
+.table-row .option-box {
   display: flex;
   flex-wrap: wrap;
   width: 763px;
 }
 
-.checkbox {
+.table-row .checkbox {
   margin-top: 10px;
   margin-right: 40px;
   width: 140px;
+  display: flex;
+}
+.table-row .checkbox input {
+  color: #758490;
 }
 
-.table-row {
-  margin-bottom: 10px;
-}
-.option-msg {
+.table-row .option-msg {
+  color: #758490;
+
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   display: inline-block;
   width: 120px;
   margin-left: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.summary {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.summary-part1 {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.summary-part1 .content {
+  color: #64748b;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.summary-part1 label {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  width: 230px;
+}
+
+.summary-part2 {
+  margin-top: 30px;
+  width: 800px;
+  align-items: center;
+}
+
+.summary-part2 .content {
+  color: #64748b;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 5px;
+}
+
+.summary-part2 label {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+.summary-part3 {
+  display: flex;
+  align-items: center;
+  width: 800px;
+  margin-top: 40px;
+}
+
+.summary-part3 .content {
+  color: #64748b;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  margin-left: 20px;
+}
+
+.summary-part3 label {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  width: 430px;
 }

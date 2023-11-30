@@ -1,0 +1,45 @@
+.splash .header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 31px;
+}
+
+.splash .header-left {
+  display: flex;
+  align-items: flex-end;
+}
+.splash .header-right {
+  display: flex;
+  align-items: center;
+}
+.splash .btn {
+  width: 88px;
+  height: 40px;
+  border-color: #5f285e;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  margin-right: 40px;
+}
+
+.splash .subtitle {
+  margin-left: 2px;
+  color: #8990ad;
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 700;
+}
+/* 
+.splash-pic {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 30%;
+  height: auto;
+} */
