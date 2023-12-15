@@ -4,7 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Questionaire from "./stepper.jsx";
 import Splash from "./splash.jsx";
-import DataBase from "./database.jsx";
+// import DataBase from "./database.jsx";
+import DataBase from "./table2.jsx";
 
 function MainApp() {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import "./splash.css";
+import { Link } from "react-router-dom";
 // import splash2 from "./img/splash2.jpeg";
 
 function Splash() {
@@ -26,11 +27,18 @@ function Splash() {
           </svg>
           <div className="subtitle">supply diversity</div>
         </div>
-        <div className="header-right">
-          <div className="btn">About</div>
-        </div>
       </div>
-
+      <div className="subheading">
+        <h2>Welcome!</h2>
+      </div>
+      <div className="cta-buttons-container">
+        <Link to="/form">
+          <button className="homebtn">Intake Form</button>
+        </Link>
+        <Link to="/database">
+          <button className="homebtn">Supplier Database</button>
+        </Link>
+      </div>
       {/* <img src={splash2} alt="splash pic" className="splash-pic" /> */}
     </div>
   );

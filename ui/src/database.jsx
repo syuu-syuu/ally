@@ -33,7 +33,7 @@ function DataBase() {
     fetchData();
   }, []);
 
-  // Print the data retrived from the database whenever the data is updated.
+  // Print the data retrieved from the database whenever the data is updated.
   useEffect(() => {
     console.log(savedData);
   }, [savedData]);

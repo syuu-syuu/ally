@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import GenericField from "./genericField";
 import "./form.css";
 
@@ -8,39 +8,34 @@ const steps = [
     fields: [
       {
         type: "input",
-        name: "Company Name",
+        name: "companyName",
         label: "Company Name",
         placeholder: "ABC Company",
       },
-      {
-        type: "input",
-        name: "Contact Info",
-        label: "Contact Info",
-        placeholder: "xx-xxxxxxxxx",
-      },
+
       {
         type: "input",
         name: "NAICS Code(s)",
         label: "NAICS Code(s)",
-        placeholder: "xxxxxx",
+        placeholder: "221114",
       },
       {
         type: "input",
         name: "Annual Revenue",
         label: "Annual Revenue",
-        placeholder: "12344 $",
+        placeholder: "10000",
       },
       {
         type: "input",
         name: "Number of Employees",
         label: "Number of Employees",
-        placeholder: "123",
+        placeholder: "100",
       },
       {
         type: "input",
         name: "Geographical Coverage Area",
         label: "Geographical Coverage Area",
-        placeholder: "1234 msq",
+        placeholder: "Nationwide",
       },
       {
         type: "input",
@@ -48,8 +43,27 @@ const steps = [
         label: "Diversity Council Affiliation",
         placeholder: "NMSDC, WBENC",
       },
+      {
+        type: "input",
+        name: "contactName",
+        label: "Contact Name",
+        placeholder: "John Doe",
+      },
+      {
+        type: "input",
+        name: "email",
+        label: "Contact Email",
+        placeholder: "johndoe@ally.com",
+      },
+      {
+        type: "input",
+        name: "phoneNumber",
+        label: "Phone Number",
+        placeholder: "(123) 456-7890",
+      },
     ],
   },
+
   // Second Step
   {
     fields: [
